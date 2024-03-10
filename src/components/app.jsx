@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 /*class App extends React.Component {
     state = {
@@ -33,15 +33,30 @@ import React, {useState} from 'react'
     }
 }*/
 function randomNumber() {
-    console.log("Random number")
+    console.log("Number")
 
     return Math.round(Math.random() * 100)
 }
 
-function App() {
+function Counter() {
     const [counter, setCounter] = useState(randomNumber)
     const [auto, setAuto] = useState(false)
     const [state, setState] = useState({count: 0, autoPlay: false})
+
+    const logger = () => console.log("Hello world!")
+    useEffect(() => {
+        console.log("Mounting")
+        document.title = `Counter: ${counter}`
+    }, []);
+
+    useEffect(() => {
+        console.log("Updating")
+        document.title = `Updated counter: ${counter}`
+
+        window.addEventListener("click", logger)
+
+        return () => window.removeEventListener("click", logger)
+    }, [counter]);
 
     function onChangeState() {
         setState(({count, autoPlay}) => ({count, autoPlay: !autoPlay}))
@@ -90,5 +105,15 @@ function App() {
     )
 }
 
+function App() {
+    const [show, setShow] = useState(true)
+    return <div>
+        <button className={"btn btn-secondary"} onClick={() => setShow(prevState => !prevState)}>
+            Click me to unmount
+            Counter
+        </button>
+        {show && <Counter/>}
+    </div>
+}
 
 export default App
