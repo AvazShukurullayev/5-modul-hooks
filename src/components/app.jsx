@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import Form from "./form/Form.jsx";
 
 /*class App extends React.Component {
     state = {
@@ -106,6 +107,21 @@ function Counter() {
 }
 
 function App() {
+    return (
+        <div className={"bg-dark w-100 h-100"}>
+            <div className="container">
+                <Form/>
+            </div>
+        </div>
+
+    )
+}
+
+export default App
+
+
+/*
+function App() {
     const [show, setShow] = useState(true)
     return <div>
         <button className={"btn btn-secondary"} onClick={() => setShow(prevState => !prevState)}>
@@ -114,6 +130,4 @@ function App() {
         </button>
         {show && <Counter/>}
     </div>
-}
-
-export default App
+}*/
